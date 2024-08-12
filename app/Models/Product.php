@@ -9,4 +9,12 @@ class Product extends Model
 {
     use HasFactory;
     public $guarded = [];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function shops()
+    {
+        return $this->belongsToMany(Shop::class)->withTimestamps();
+    }
 }
