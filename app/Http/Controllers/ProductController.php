@@ -76,6 +76,9 @@ class ProductController extends Controller
         return $products;
     }
 
+    /**
+     * @return void
+     */
     public function testMethod()
     {
 
