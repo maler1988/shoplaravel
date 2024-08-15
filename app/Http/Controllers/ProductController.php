@@ -65,4 +65,14 @@ class ProductController extends Controller
     {
         //
     }
+
+    /**
+     * Для вывода товаров на главной
+     * @return mixed
+     */
+    public function getMainPageProducts()
+    {
+        $products = Product::orderBy('created_at', 'DESC')->limit(4)->get();
+        return $products;
+    }
 }

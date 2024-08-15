@@ -5,7 +5,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 
 Route::get('/', function () {
-    return view('welcome');
+    $products = (new ProductController())->getMainPageProducts();
+    $shops = (new ShopController())->getMainPageShop();
+    return view('welcome', ['products'=>$products, 'shops'=>$shops]);
 });
 
 

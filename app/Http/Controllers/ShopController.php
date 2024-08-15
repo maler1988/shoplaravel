@@ -124,4 +124,14 @@ class ShopController extends Controller
     {
         //
     }
+
+    /**
+     * Магазины на главной
+     * @return mixed
+     */
+    public function getMainPageShop()
+    {
+        $arShops = Shop::orderBy('created_at')->limit(3)->get();
+        return $arShops;
+    }
 }
