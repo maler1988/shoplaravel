@@ -75,4 +75,9 @@ class ProductController extends Controller
         $products = Product::orderBy('created_at', 'DESC')->limit(4)->get();
         return $products;
     }
+
+    public function testMethod()
+    {
+
+    }
 }
