@@ -76,11 +76,19 @@ class ProductController extends Controller
         return $products;
     }
 
-    /**
-     * @return void
-     */
-    public function testMethod()
-    {
 
+    /**
+     * @param int $productId
+     * @param int $shopId
+     * @return false
+     */
+    public function detachFromShop(int $productId, int $shopId)
+    {
+        $product = (new Product())->findOrFail($productId);
+        if($product){
+           return $product->shops()->wherePivot('shop_id', $shopId)->detach();
+        }
+
+        return false;
     }
 }

@@ -13,3 +13,6 @@ Route::get('/', function () {
 
 Route::resource('/products', ProductController::class);
 Route::resource('/shops', ShopController::class);
+
+
+Route::get('/products/{product_id}/detach/{shop_id}', [ProductController::class, 'detachFromShop']);
