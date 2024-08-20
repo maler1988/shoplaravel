@@ -43,6 +43,21 @@ class ProductController extends Controller
     }
 
     /**
+     * Показать товар в магазине
+     * @param int $shopId
+     * @param int $productId
+     * @return array|\Closure|false|\Illuminate\Container\Container|mixed|object|null
+     */
+    public function showInShop(int $shopId, int $productId)
+    {
+        $product = new Product();
+        $productData = $product->find($productId);
+        //Не уверен в правильности такого подхода, shops всё равно приходится перебивать foreache-м в шаблоне
+        $productData->shops = $productData->shops()->wherePivot('shop_id', $shopId)->get();
+        return view('product.show_in_shop', ['product'=>$productData, 'shopid'=>$shopId]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)

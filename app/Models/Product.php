@@ -15,6 +15,8 @@ class Product extends Model
      */
     public function shops()
     {
-        return $this->belongsToMany(Shop::class)->withTimestamps();
+        return $this->belongsToMany(Shop::class)
+            ->withTimestamps()
+            ->withPivot(['product_price_in_shop']);
     }
 }
