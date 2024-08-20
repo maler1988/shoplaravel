@@ -26,6 +26,7 @@
                 <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('shops.index')  }}">Shops</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('products.index')  }}">Proucts</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('compare.index')  }}">Compare</a></li>
             </ul>
             <form class="d-flex">
                 <button class="btn btn-outline-dark" type="submit">
