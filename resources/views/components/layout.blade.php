@@ -14,6 +14,12 @@
     <link href="/css/styles.css" rel="stylesheet" />
     <!-- Jquery Add -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+        button.nav-link {
+            border: 0px;
+            background: transparent;
+        }
+    </style>
 </head>
 <body>
 <!-- Navigation-->
@@ -28,6 +34,28 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('products.index')  }}">Proucts</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('compare.index')  }}">Compare</a></li>
             </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+
+                @guest
+                    <li  class="nav-item">
+                        <a class="nav-link" href="{{ route('auth.login') }}">Login</a>
+                    </li>
+                @endguest
+
+                @auth
+                    <li  class="nav-item">
+                        <form method="post" id="logouth" action="{{route('auth.logout')}}">
+                            @csrf
+                            <button class="nav-link" type="submit" id="logout">Logout</button>
+                        </form>
+                    </li>
+                    <li  class="nav-item">
+                        <a class="nav-link" href="{{ route('auth.profile') }}">{{ Auth::user()->name  }} personal</a>
+                    </li>
+                @endauth
+
+            </ul>
+            <!--
             <form class="d-flex">
                 <button class="btn btn-outline-dark" type="submit">
                     <i class="bi-cart-fill me-1"></i>
@@ -35,6 +63,7 @@
                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                 </button>
             </form>
+            -->
         </div>
     </div>
 </nav>
@@ -57,9 +86,23 @@
 <footer class="py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
 </footer>
-<!-- Bootstrap core JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
-<script src="/js/scripts.js"></script>
+
+    <script type="text/javascript">
+        /*$(document).ready(function (){
+            $('#logout').submit(function (event){
+                event.preventDefault();
+                let url = $(this).data('url');
+                $.post(url, $(this).serialize(), function (){
+                    window.location.href = '/';
+                });
+                return false;
+            });
+        });*/
+    </script>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="/js/scripts.js"></script>
 </body>
 </html>

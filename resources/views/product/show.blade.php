@@ -35,22 +35,25 @@
 
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center">
-                <div class="col-md-12">
-                    <h2>Отзывы:</h2>
-                    @foreach($reveiws as $review)
-                        <div class="review mb-3 mt-3">
-                            <!-- <b>Автор:</b> -->
-                            <b>Оценка:</b> {{ $review->estimation }}<br/>
-                            <b>Текст отзыва:</b> {{ $review->review }}
-                        </div>
-                        <hr>
-                    @endforeach
-                </div>
+                @if(count($reveiws) > 0)
+                    <div class="col-md-12">
+                        <h2>Отзывы:</h2>
+                        @foreach($reveiws as $review)
+                            <div class="review mb-3 mt-3">
+                                <!-- <b>Автор:</b> -->
+                                <b>Оценка:</b> {{ $review->estimation }}<br/>
+                                <b>Текст отзыва:</b> {{ $review->review }}
+                            </div>
+                            <hr>
+                        @endforeach
+                    </div>
+                @endif
                 <div class="col-md-12">
                     <h2>Добавить отзыв</h2>
                     <form method="post" action="{{ route('reviews.store') }}">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                         <div class="mb-3">
                             <label for="estimation" class="form-label">Оценка</label>
                             <select id="estimation" name="estimation" class="form-select" aria-label="Ваша оценка">

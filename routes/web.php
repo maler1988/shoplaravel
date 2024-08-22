@@ -5,12 +5,13 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\CompareController;
 use \App\Http\Controllers\ReviewController;
+use \App\Http\Controllers\SessionController;
 
 Route::get('/', function () {
     $products = (new ProductController())->getMainPageProducts();
     $shops = (new ShopController())->getMainPageShop();
     return view('welcome', ['products'=>$products, 'shops'=>$shops]);
-});
+})->name('home');
 
 
 Route::resource('/products', ProductController::class);
@@ -31,3 +32,17 @@ Route::delete('/compare/{product_id}', [CompareController::class, 'destroy']);
 
 //Отзывы на товары
 Route::resource('/reviews', ReviewController::class);
+
+//Авторизация, регистрация
+Route::middleware(['guest'])->group(function(){
+    Route::get('/auth/login', [ SessionController::class, 'create' ])->name('auth.login');
+    Route::post('/auth/login', [ SessionController::class, 'store' ]);
+});
+
+//ЛК, выход
+Route::middleware(['auth'])->group(function(){
+
+    Route::get('/auth/profile', [ SessionController::class, 'profile' ])->name('auth.profile');
+    Route::post('/auth/logout', [ SessionController::class, 'destroy' ])->name('auth.logout');
+
+});

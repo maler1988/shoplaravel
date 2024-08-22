@@ -32,6 +32,7 @@ class ReviewController extends Controller
         $payload = $request->validate([
             'review' => 'required|min:10|max:200',
             'product_id' => 'required',
+            'user_id' => 'required',
             'estimation' => 'required',
         ]);
 
