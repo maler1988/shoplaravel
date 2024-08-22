@@ -32,6 +32,50 @@
                 </div>
             </div>
         </div>
+
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <div class="col-md-12">
+                    <h2>Отзывы:</h2>
+                    @foreach($reveiws as $review)
+                        <div class="review mb-3 mt-3">
+                            <!-- <b>Автор:</b> -->
+                            <b>Оценка:</b> {{ $review->estimation }}<br/>
+                            <b>Текст отзыва:</b> {{ $review->review }}
+                        </div>
+                        <hr>
+                    @endforeach
+                </div>
+                <div class="col-md-12">
+                    <h2>Добавить отзыв</h2>
+                    <form method="post" action="{{ route('reviews.store') }}">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <div class="mb-3">
+                            <label for="estimation" class="form-label">Оценка</label>
+                            <select id="estimation" name="estimation" class="form-select" aria-label="Ваша оценка">
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                            @error('estimation')
+                                {{ $message }}
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            <label for="review" class="form-label">Текст отзыва</label>
+                            <textarea class="form-control" id="review" rows="3" name="review" ></textarea>
+                            @error('review')
+                                {{ $message }}
+                            @endif
+                        </div>
+                        <button type="submit" class="btn btn-primary">Оставить отзыв</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </section>
 
 

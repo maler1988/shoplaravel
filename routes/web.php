@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\CompareController;
+use \App\Http\Controllers\ReviewController;
 
 Route::get('/', function () {
     $products = (new ProductController())->getMainPageProducts();
@@ -27,3 +28,6 @@ Route::get('/compare', [CompareController::class, 'index'])->name('compare.index
 //Добавление/удаление товара в список сравнения
 Route::post('/compare', [CompareController::class, 'store']);
 Route::delete('/compare/{product_id}', [CompareController::class, 'destroy']);
+
+//Отзывы на товары
+Route::resource('/reviews', ReviewController::class);

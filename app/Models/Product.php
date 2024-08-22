@@ -19,4 +19,12 @@ class Product extends Model
             ->withTimestamps()
             ->withPivot(['product_price_in_shop']);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }
